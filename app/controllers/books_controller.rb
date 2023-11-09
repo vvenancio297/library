@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
@@ -35,6 +37,10 @@ class BooksController < ApplicationController
     @book.destroy!
 
     redirect_to books_url, notice: "Book was successfully destroyed." 
+  end
+
+  def reserve
+
   end
 
   private
