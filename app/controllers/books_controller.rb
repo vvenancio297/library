@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[show edit update destroy pickup]
 
   def index
-    @books = Book.search(params[:q])
+    @books = Book.includes(:reservations).search(params[:q])
   end
 
   def show; end
@@ -39,8 +39,14 @@ class BooksController < ApplicationController
     redirect_to books_url, notice: "Book was successfully destroyed." 
   end
 
-  def reserve
-
+  def pickup
+    book_reservation = BookReservation.new(current_user, @book)
+    
+    if book_reservation.pickup
+      redirect_to book_url(@book), notice: "Successfully done."
+    else
+      render :show, error: "Could not pick up book."
+    end
   end
 
   private

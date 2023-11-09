@@ -3,6 +3,8 @@
 class Book < ApplicationRecord
   validates :title, :author, :genre, :description, presence: true
 
+  has_many :reservations
+
   scope :search, -> (query) do
     if query.present?
       statement = <<-SQL
@@ -16,5 +18,16 @@ class Book < ApplicationRecord
     else
       self
     end
+  end
+
+  def available?
+    available_quantity > 0
+  end
+
+  def available_quantity
+    lent_book_status = Reservation.statuses[:lent]
+    lent_books_count = reservations.where(book_id: id, status: lent_book_status).count
+    
+    quantity - lent_books_count
   end
 end

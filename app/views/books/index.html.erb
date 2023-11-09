@@ -14,7 +14,7 @@
 <div id="books">
   <% @books.each do |book| %>
     <%= render book %>
-    <%= link_to "Reserve", books_reserve_path(book) %>
+    <%= link_to "Reserve", new_book_reservation_path(book), method: :post %>
   <% end %>
 </div>
 
