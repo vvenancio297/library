@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ilium City Public Library</h1>
+
+<%= form_tag '/books', method: :get do %>
+  <div>
+    <%= text_field_tag :q, "Enter your search here" %>
+  </div>
+  <div>
+    <%= submit_tag 'search' %>
+  </div>
+<% end %>
+
+<div id="books">
+  <% @books.each do |book| %>
+    <%= render book %>
+  <% end %>
+</div>
+
+<% if current_user %>
+  <%= link_to "Register a book", new_book_path %>
+<% end %>
