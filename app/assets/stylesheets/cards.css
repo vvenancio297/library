@@ -1,0 +1,12 @@
+.card {
+  width: 330px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.card p {
+  margin: 10px 0;
+}
