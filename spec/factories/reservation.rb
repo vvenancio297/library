@@ -3,7 +3,7 @@ FactoryBot.define do
     book
     association :user, :admin
     pickup_time { Time.zone.tomorrow }
-    sequence(:number) { |n| n }
+    code { SecureRandom.uuid }
 
     trait :lent do  
       status { Reservation.statuses[:lent] }

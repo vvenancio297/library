@@ -16,7 +16,7 @@
 
   <p>
     <strong>Reservation numer:</strong>
-    <%= reservation.number %>
+    <%= reservation.code %>
   </p>
 
   <p>
@@ -24,7 +24,7 @@
     <%= reservation.status %>
   </p>
 
-  <% if current_user.admin? %>
+  <% if current_user.admin? && reservation.status != 'returned' %>
     <%= link_to "Edit", edit_book_reservation_path(book_id: reservation.book_id, id: reservation) %>
   <% end %>
 </div>

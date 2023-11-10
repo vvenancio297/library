@@ -16,7 +16,6 @@ RSpec.describe Reservation, type: :model do
     it { is_expected.to validate_presence_of(:book_id) }
     it { is_expected.to validate_presence_of(:status) }
     it { is_expected.to validate_presence_of(:user_id) }
-    it { is_expected.to validate_presence_of(:number) }
   end
 
   describe '#user_email' do
@@ -46,22 +45,22 @@ RSpec.describe Reservation, type: :model do
     end
   end
 
-  describe '.by_number' do
-    context 'when number is present' do
-      let!(:reservation) { create(:reservation, :reserved, number: number) }
-      let(:number) { 9 }
+  describe '.by_code' do
+    context 'when code is present' do
+      let!(:reservation) { create(:reservation, :reserved, code: code) }
+      let(:code) { 'ABCabcs' }
 
-      it 'returns reservations by its number' do
-        reservations = Reservation.by_number(number)
+      it 'returns reservations by its code' do
+        reservations = Reservation.by_code(code)
         expect(reservations).to eq([reservation])
       end
     end
 
-    context 'when number is not present' do
-      let(:number) { nil }
+    context 'when code is not present' do
+      let(:code) { nil }
 
       it 'returns self' do
-        reservations = Reservation.by_number(number)
+        reservations = Reservation.by_code(code)
         expect(reservations).to be_empty
       end
     end

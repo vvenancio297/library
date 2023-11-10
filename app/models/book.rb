@@ -2,7 +2,6 @@
 
 class Book < ApplicationRecord
   validates :title, :author, :genre, :description, presence: true
-  validates :quantity, presence: true, numericality: { greater_than: 0 }
 
   has_many :reservations
 
@@ -22,22 +21,8 @@ class Book < ApplicationRecord
   end
 
   def available?
-    available_quantity > 0
-  end
-
-  def any_valid_reservation?(user)
-    last_reservation = reservations.where(user_id: user.id)
-                                   .order('created_at DESC')
-                                   .limit(1)
-                                   .first
-
-    last_reservation && last_reservation.status != Reservation.statuses[:returned]
-  end
-
-  def available_quantity
-    lent_status = Reservation.statuses[:lent]
-    lent_books_count = reservations.where(status: lent_status).count
+    last_reservation = reservations.order('created_at DESC').limit(1).first
     
-    quantity - lent_books_count
+    last_reservation.blank? || last_reservation.status == "returned"
   end
 end

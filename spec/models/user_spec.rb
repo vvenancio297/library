@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'requires role' do
-      user = User.new(email: 'test@test.com', password: '123456')
+      user = User.new(email: 'test@test.com', password: '123456', role: nil)
       errors = ["Role can't be blank"]
       expect(user.valid?).to be_falsey
       expect(user.errors.full_messages).to eq(errors)
