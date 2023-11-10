@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ilium City Public Library Reservations</h1>
+
+<%= form_tag reservations_path, method: :get do %>
+  <div>
+    <%= text_field_tag :q, params[:q], placeholder: "Enter the reservation number here" %>
+  </div>
+  <div>
+    <%= submit_tag 'search' %>
+  </div>
+<% end %>
+
+<div id="reservations">
+  <% @reservations.each do |reservation| %>
+    <%= render reservation %>
+    <%= link_to "Edit", edit_book_reservation_path(book_id: reservation.book_id, id: reservation) %>
+  <% end %>
+</div>

@@ -4,20 +4,42 @@ class Reservation < ApplicationRecord
   belongs_to :book
   belongs_to :user
 
-  validates :book, :user, :status, :pickup_time, presence: true
+  validates :book_id, :user_id, :status, :pickup_time, :number, presence: true
+  validates :book_id, uniqueness: { scope: [:user_id, :status] }
 
-  enum status: { returned: 0, lent: 1 }
+  validate :check_book_availability, on: :update
+  validate :check_pickup_time
 
-  before_save :validate_pickup_time
-  before_save :generate_reservation_number
+  enum status: { reserved: 0, lent: 1 }
+
+  scope :by_number, -> (number) do
+    return where(number: number) if number.present?
+    self
+  end
+
+  before_validation :generate_number
+
+  delegate :email, to: :user, prefix: :user
+  delegate :title, to: :book, prefix: :book
+  delegate :available?, to: :book, prefix: :book
 
   private
 
-  def validate_pickup_time
-    errors.add(:pickup_time, "") if pickup_time < Time.zone.today
+  def check_pickup_time
+    if pickup_time < Time.zone.today
+      errors.add(:pickup_time, "Pickup time should be greather than today")
+    end
   end
 
-  def generate_reservation_number
-    
+  def generate_number
+    books_quantity = Book.sum(:quantity)
+    self.number ||= rand(1..books_quantity)
+  end
+
+  def check_book_availability
+    return if book_available?
+    return unless status_changed?
+
+    errors.add(:base, "The book you're trying to lent is no longer available")
   end
 end

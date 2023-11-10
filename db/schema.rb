@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_213316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "pickup_time"
-    t.integer "resevation_number"
+    t.integer "number"
     t.index ["book_id", "user_id", "status"], name: "index_reservations_on_book_id_and_user_id_and_status", unique: true
     t.index ["book_id"], name: "index_reservations_on_book_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
