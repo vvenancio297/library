@@ -3,34 +3,34 @@
 
 ## Set up application
 
-Para executar a aplicação é necessário ter o [ruby](https://www.ruby-lang.org/pt/documentation/installation/) 3.2.2 instalado na sua máquina, além do [mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/). 
+To run the application you must have [ruby 3.2.2](https://www.ruby-lang.org/pt/documentation/installation/) and [mysql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/). After that, follow the steps below
 
-1. Clone application using HTTPS, por exemplo
+1. Clone application using HTTPS, for example
 ```
 $ git clone https://github.com/vvenancio297/library.git
 ```
 
-2. Acesse a pasta do projeto através do comando:
+2. Go to theproject directory
 ```
 $ cd library
 ```
 
-3. Instalar o bundler, pois através dele instalaremos as dependências definidas no Gemfile
+3. Install bundler, as through it we will install the dependencies defined in the Gemfile
 ```
 $ gem install bundler -v 2.4.10
 ```
 
-4. Após a instalação do bundler, basta somente instalarmos as dependências executando o comando:
+4. Now we just need to install the dependencies by running the command
 ```
 $ bundle install
 ```
 
-5. Finalmente, como último passo basta somente definirmos o arquivo de variáveis de ambiente que devem estar no arquivo `.env`:
+5. Finally, as a last step, we just need to define the environment variables file that must be in the file `.env`:
 ```
 $ cp .env.sample .env
 ```
 
-6. Para subir o servidor:
+6. Start the server
 ```
 $ rails server
 ```
@@ -57,6 +57,9 @@ Caso você esqueça seu número de reserva, basta somente acessar a página de r
 
 ## Diagrams
 
+This is the database diagram. 
+
+![Database diagram](./docs/database_diagram.png)
 
 ## What should be better?
 
