@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "/books", type: :request do
+  let!(:admin) { create(:user, :admin) }
+
+  before(:each) do
+    Warden.test_mode!
+    login_as(admin, scope: :user)
+  end
+
+  after(:each) do
+    Warden.test_reset!
+  end
+
   let(:valid_attributes) {
     {
       author: 'Some guy',

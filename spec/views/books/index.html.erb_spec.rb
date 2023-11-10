@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "books/index", type: :view do
+  let(:user) { build(:user, :admin) }
+
   before(:each) do
+    allow(view).to receive(:current_user).and_return(user)
+
     assign(:books, [
       Book.create!(
         title: "Title",
