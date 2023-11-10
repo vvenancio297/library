@@ -14,13 +14,12 @@
   <%= form.hidden_field :book_id, value: params[:book_id] %>
 
   <% if current_user.admin? %>
-    <div>
+    <div class="field">
       <%= form.label :status, style: "display: block" %>
       <%= form.select :status, Reservation.statuses %>
     </div>
+    <div class="field">
+      <%= form.submit %>
+    </div>
   <% end %>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

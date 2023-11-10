@@ -1,4 +1,4 @@
-<div id="<%= dom_id reservation %>">
+<div id="<%= dom_id reservation %>" class="card">
   <p>
     <strong>Member:</strong>
     <%= reservation.user_email %>
@@ -23,4 +23,8 @@
     <strong>Status:</strong>
     <%= reservation.status %>
   </p>
+
+  <% if current_user.admin? %>
+    <%= link_to "Edit", edit_book_reservation_path(book_id: reservation.book_id, id: reservation) %>
+  <% end %>
 </div>
