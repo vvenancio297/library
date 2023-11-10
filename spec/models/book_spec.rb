@@ -54,28 +54,26 @@ RSpec.describe Book, type: :model do
   end
 
   describe '#available?' do
-    context "when available books is greather than zero" do
-      let(:book) { create(:book, quantity: 1) }
-
-      it "returns true" do
-        expect(book.available?).to eq(true)
+    context "when it's not returned" do
+      let(:lent) { Reservation.statuses[:lent] }
+      let(:user) { create(:user, :admin) }
+      let(:book) { create(:book) }
+      
+      before do
+        create(:reservation, book_id: book.id, user_id: user.id, status: lent)
       end
-    end
-
-    context "when available books is not greather than zero" do
-      let(:book) { build(:book) }
 
       it "returns false" do
         expect(book.available?).to eq(false)
       end
     end
-  end
 
-  describe '#available_quantity' do
-    let(:book) { build(:book) }
+    context "when it's returned" do
+      let(:book) { build(:book) }
 
-    it 'returns available quantity' do
-      expect(book.available_quantity).to eq(0)
+      it "returns false" do
+        expect(book.available?).to eq(true)
+      end
     end
   end
 

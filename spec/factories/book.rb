@@ -4,6 +4,5 @@ FactoryBot.define do
     genre { 'Fantasy' }
     description { 'The definitive fantasy book' }
     author { 'J.R.R. Tolkien' }
-    quantity { 0 }
   end
 end

@@ -20,12 +20,13 @@
   </p>
 
   <p>
-    <strong>Quantity:</strong>
-    <%= book.quantity %>
+    <strong>Available:</strong>
+    <%= book.available? ? 'Yes' : 'No' %>
   </p>
-
-  <p>
-    <strong>Available quantity:</strong>
-    <%= book.available_quantity %>
-  </p>
+  <% if current_user.admin? %>
+    <%= link_to "Edit", edit_book_path(book) %>
+  <% end %>
+  <% if book.available? %>
+    <%= link_to "Reserve", new_book_reservation_path(book), method: :post %>
+  <% end %>
 </div>

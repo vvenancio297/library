@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'books#index'
 
-  resources :books do
+  resources :books, except: %i[show destroy] do
     resources :reservations, only: %i[new edit update create]
   end
 

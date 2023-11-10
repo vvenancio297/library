@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
 
   def index
     @reservations = if current_user.admin?
-                      Reservation.by_number(params[:q])
+                      Reservation.by_code(params[:q])
                     else
                       current_user.reservations
                     end
@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
     @reservation.status = Reservation.statuses[:reserved]
 
     if @reservation.save
-      redirect_to books_path, notice: ""
+      redirect_to books_path, notice: "Your book is reserved. Reservation number #{@reservation.code}"
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
     status = Reservation.statuses.key(params[:reservation][:status].to_i)
 
     if @reservation.update(status: status)
-      redirect_to reservations_path, notice: ""
+      redirect_to reservations_path, notice: "Reservation updated"
     else
       render :edit, status: :unprocessable_entity
     end
