@@ -32,7 +32,13 @@ $ bundle install
 $ cp .env.sample .env
 ```
 
-6. Start the server
+6. Create your local database running
+```
+$  rails db:drop db:create db:migrate db:seed
+```
+_it will also create a new admin user for you to log in_
+
+7. Start the server
 ```
 $ rails server
 ```
@@ -62,7 +68,10 @@ When you're an admin, your able to change the reservation status as well reserve
 
 ## Diagrams
 
-This is the database diagram. 
+This is the database diagram.
+
+- A member/admin can have many registrations
+- A book may have many registratios also, but only once at time
 
 ![Database diagram](./docs/database_diagram.png)
 
@@ -74,10 +83,14 @@ Thinking about more development time, I listed some topics where it would be wor
 - add a reservation queue, so the admin must always approve reservations in an orderly manner
 - use any front-end frameworks 
 - implement user account recovery
-- implement robust authorization 
+- implement robust authorization
 - reservation pagination and books pagination
 - add more reservation filters in the reservations page
 - add reservation validation based on the pickup time
 - docker and docker-compose
 - Increase code coverage
 - retry to generate reseravation code if an error happens
+- Use view helpers to avoid business rules in view
+- Add soft delete process to books
+- If the book's reservation is returned, lock its updating in the backend side
+- Use [state_machines](https://github.com/state-machines/state_machines) gem state_machines to manage reservation statuses
