@@ -1,25 +1,27 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Ilium City Public Library</h1>
+<h1>Ilium City Public Library Books</h1>
 
-<% if current_user.admin? %>
-  <%= link_to "Register new book", new_book_path %>
-<% end %>
-
-<%= form_tag books_path, method: :get do %>
-  <div>
-    <%= text_field_tag :q, params[:q], placeholder: "Enter your search here" %>
-  </div>
-  <div>
-    <%= submit_tag 'search' %>
-  </div>
-<% end %>
-
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <% if book.available? %>
-      <%= link_to "Reserve", new_book_reservation_path(book), method: :post %>
-    <% end %>
+<% if @books.present? || params[:q].present? %>
+  <%= form_tag books_path, method: :get do %>
+    <div>
+      <%= text_field_tag :q, params[:q], placeholder: "Enter your search here" %>
+    </div>
+    <div>
+      <%= submit_tag 'search' %>
+    </div>
   <% end %>
-</div>
+
+  <div id="books">
+    <% @books.each do |book| %>
+      <%= render book %>
+      <% if book.available? && !book.any_valid_reservation?(current_user) %>
+        <%= link_to "Reserve", new_book_reservation_path(book), method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <p>
+    There aren't books in the Library
+  </p>
+<% end%>

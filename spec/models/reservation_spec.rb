@@ -17,7 +17,6 @@ RSpec.describe Reservation, type: :model do
     it { is_expected.to validate_presence_of(:status) }
     it { is_expected.to validate_presence_of(:user_id) }
     it { is_expected.to validate_presence_of(:number) }
-    it { is_expected.to validate_uniqueness_of(:book_id).scoped_to(:user_id, :status) }
   end
 
   describe '#user_email' do

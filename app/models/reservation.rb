@@ -7,12 +7,12 @@ class Reservation < ApplicationRecord
   belongs_to :user
 
   validates :book_id, :user_id, :status, :pickup_time, :number, presence: true
-  validates :book_id, uniqueness: { scope: [:user_id, :status] }
 
   validate :check_book_availability, on: :update
   validate :check_pickup_time
+  validate :check_reservation_uniqueness, on: :create
 
-  enum status: { reserved: 0, lent: 1 }
+  enum status: { reserved: 0, lent: 1, returned: 2 }
 
   before_validation :generate_number
 
@@ -26,6 +26,18 @@ class Reservation < ApplicationRecord
   end
 
   private
+
+  def check_reservation_uniqueness
+    reservation = self.class
+                      .where(book_id: book_id, user_id: user_id)
+                      .order('created_at DESC')
+                      .limit(1)
+                      .first
+
+    if reservation && reservation.status != self.class.statuses[:returned]
+      errors.add(:base, "You should get or give back #{book_title} before reserve it again!")
+    end
+  end
 
   def check_pickup_time
     if pickup_time < Time.zone.today

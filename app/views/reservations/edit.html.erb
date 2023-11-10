@@ -13,11 +13,6 @@
 
   <%= form.hidden_field :book_id, value: params[:book_id] %>
 
-  <div>
-    <%= form.label :pickup_time, style: "display: block" %>
-    <%= form.datetime_field :pickup_time %>
-  </div>
-
   <% if current_user.admin? %>
     <div>
       <%= form.label :status, style: "display: block" %>
