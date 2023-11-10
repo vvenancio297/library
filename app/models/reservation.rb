@@ -12,16 +12,16 @@ class Reservation < ApplicationRecord
 
   enum status: { reserved: 0, lent: 1 }
 
-  scope :by_number, -> (number) do
-    return where(number: number) if number.present?
-    self
-  end
-
   before_validation :generate_number
 
   delegate :email, to: :user, prefix: :user
   delegate :title, to: :book, prefix: :book
   delegate :available?, to: :book, prefix: :book
+
+  scope :by_number, -> (number) do
+    return where(number: number) if number.present?
+    self
+  end
 
   private
 
