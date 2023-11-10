@@ -25,8 +25,8 @@ class Book < ApplicationRecord
   end
 
   def available_quantity
-    lent_book_status = Reservation.statuses[:lent]
-    lent_books_count = reservations.where(book_id: id, status: lent_book_status).count
+    lent_status = Reservation.statuses[:lent]
+    lent_books_count = reservations.where(status: lent_status).count
     
     quantity - lent_books_count
   end
