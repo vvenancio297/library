@@ -16,11 +16,12 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
-    @reservation.user_id = current_user.id
-    @reservation.status = Reservation.statuses[:reserved]
+    service = BookReservation::Create.new(params[:reservation][:book_id],
+                                          current_user,
+                                          params[:reservation][:pickup_time])
+    @reservation = service.run
 
-    if @reservation.save
+    if @reservation.errors.blank?
       redirect_to books_path, notice: "Your book is reserved. Reservation number #{@reservation.code}"
     else
       render :new, status: :unprocessable_entity
@@ -30,9 +31,11 @@ class ReservationsController < ApplicationController
   def edit; end
 
   def update
-    status = Reservation.statuses.key(params[:reservation][:status].to_i)
+    service = BookReservation::Update.new(@reservation,
+                                          params[:reservation][:status])
+    @reservation = service.run
 
-    if @reservation.update(status: status)
+    if @reservation.errors.blank?
       redirect_to reservations_path, notice: "Reservation updated"
     else
       render :edit, status: :unprocessable_entity
@@ -40,10 +43,6 @@ class ReservationsController < ApplicationController
   end
 
   private
-
-  def reservation_params
-    params.require(:reservation).permit(:book_id, :status, :pickup_time)
-  end
 
   def set_reservation
     @reservation = Reservation.find(params[:id])

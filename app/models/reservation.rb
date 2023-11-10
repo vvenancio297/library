@@ -5,6 +5,7 @@ class Reservation < ApplicationRecord
   belongs_to :user
 
   validates :book_id, :user_id, :status, :pickup_time, :code, presence: true
+  validates :code, uniqueness: true
 
   validate :check_pickup_time
 
@@ -24,7 +25,7 @@ class Reservation < ApplicationRecord
   private
 
   def check_pickup_time
-    if pickup_time < Time.zone.today
+    if pickup_time && pickup_time < Time.zone.today
       errors.add(:pickup_time, "Pickup time should be greather than today")
     end
   end
