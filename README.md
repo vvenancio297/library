@@ -112,7 +112,7 @@ Thinking about more development time, I listed some topics where it would be wor
 - if the book's reservation is returned, lock its updating in the backend side
 - use [state_machines](https://github.com/state-machines/state_machines) gem state_machines to manage reservation statuses
 - add pull request templates
-
+- add CI
 
 ## Observations
 
