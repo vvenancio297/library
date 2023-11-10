@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Reservation < ApplicationRecord
+  MAX_NUMBER = 10_000
+
   belongs_to :book
   belongs_to :user
 
@@ -32,7 +34,7 @@ class Reservation < ApplicationRecord
   end
 
   def generate_number
-    books_quantity = Book.sum(:quantity)
+    books_quantity = Book.sum(:quantity) || MAX_NUMBER
     self.number ||= rand(1..books_quantity)
   end
 
