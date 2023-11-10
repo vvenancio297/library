@@ -1,7 +1,24 @@
 # Ilium City Public Library
 
+[![Ruby](https://badgen.net/badge/icon/ruby?icon=ruby&label)](https://https://ruby-lang.org/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+
 The Ilium City Public Library now has a book loan system that allows its library members to
 reserve and schedule a pickup time :).
+
+## Summary
+
+- [Ilium City Public Library](#ilium-city-public-library)
+  - [Summary](#summary)
+  - [Set up application](#set-up-application)
+  - [How does the app work](#how-does-the-app-work)
+    - [Rent process](#rent-process)
+    - [Admin process](#admin-process)
+  - [Technologies](#technologies)
+  - [Diagram](#diagram)
+  - [What should be better](#what-should-be-better)
+    - [Observations](#observations)
 
 ## Set up application
 
@@ -45,7 +62,7 @@ $ rails server
 
 Enjoy the application
 
-## How does the app work?
+## How does the app work
 
 Here is a click glimpse in how the app works
 
@@ -66,7 +83,7 @@ When you're an admin, your able to change the reservation status as well reserve
 - rails 7
 - mysql
 
-## Diagrams
+## Diagram
 
 This is the database diagram.
 
@@ -75,7 +92,7 @@ This is the database diagram.
 
 ![Database diagram](./docs/database_diagram.png)
 
-## What should be better?
+## What should be better
 
 Thinking about more development time, I listed some topics where it would be worth making some improvements. Are they:
 
