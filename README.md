@@ -1,5 +1,7 @@
 # Ilium City Public Library
 
+The Ilium City Public Library now has a book loan system that allows its library members to
+reserve and schedule a pickup time :).
 
 ## Set up application
 
@@ -39,15 +41,18 @@ Enjoy the application
 
 ## How does the app work?
 
+Here is a click glimpse in how the app works
 
 ### Rent process
 
-A idéia é que os membros possa alugar os livros através deste aplicativo. Para tal, é necessário que ele efetue um cadastro (por padrão todo o usuário cadastrado será um novo membro).
-Após efetuar o cadastro você será redirecionado para a listagem de livros, onde será possível efetuar a reserva através de um link. Quando a reserva for efetuada, o sistema irá gerar o número de reserva que será necessário informar ao devolver e retirar o livro
+The idea is that members can rent books through this application. To do this, they must register themselfs (by default every registered user will be a new member).
+After registering, you will be redirected to the book list page, where you can make a reservation through a link. However, when the reservation is made, the system will generate the reservation number that will be necessary to inform when returning and collecting the book.
 
-Caso você esqueça seu número de reserva, basta somente acessar a página de reservas que exibirá todas as reservas que você efetuou.
+You may be wondering what should you do if you forget your reservation number. It's simply, just access the reservations page which will display all the reservations you have made.
 
 ### Admin process
+
+When you're an admin, your able to change the reservation status as well reserve books, just like a member. However, there's one more difference, in the reservations page you'll see all the reservations made in the app, not only yours.
 
 ## Technologies
 
@@ -72,4 +77,7 @@ Thinking about more development time, I listed some topics where it would be wor
 - implement robust authorization 
 - reservation pagination and books pagination
 - add more reservation filters in the reservations page
+- add reservation validation based on the pickup time
 - docker and docker-compose
+- Increase code coverage
+- retry to generate reseravation code if an error happens
