@@ -18,7 +18,7 @@ reserve and schedule a pickup time :).
   - [Technologies](#technologies)
   - [Diagram](#diagram)
   - [What should be better](#what-should-be-better)
-    - [Observations](#observations)
+  - [Observations](#observations)
 
 ## Set up application
 
@@ -114,6 +114,6 @@ Thinking about more development time, I listed some topics where it would be wor
 - add pull request templates
 
 
-### Observations
+## Observations
 
 I'm sorry about not merging the first PRs with the squash strategy, I just forgot about it.
